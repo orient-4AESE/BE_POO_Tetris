@@ -15,35 +15,50 @@
       Ecran.UpdateMatrice(GrillePartie.GetMatriceGrille()); // Met à jour l'écran
   }
 
-  void GestionJeu::GenererPieces() {
-    //On verifie avant de liberer de la mémoire, que la piece existe
-    if (PieceActuelle != nullptr) {
-      delete PieceActuelle; //On libère la mémoire utilisé par l'ancienne pièce
-    }
-      // Génère une pièce aléatoire
-      int pieceType = random(1, 8); // Entre 1 et 7 inclus
-      //Serial.println(pieceType);
-      switch (pieceType) {
-          case 1: PieceActuelle = new TPiece(); break;
-          case 2: PieceActuelle = new IPiece(); break;
-          case 3: PieceActuelle = new LPiece(); break;
-          case 4: PieceActuelle = new SPiece(); break;
-          case 5: PieceActuelle = new ZPiece(); break;
-          case 6: PieceActuelle = new OPiece(); break;
-          case 7: PieceActuelle = new JPiece(); break;
-      }
+void GestionJeu::GenererPieces() {
+    Tetrominos* NouvellePiece = nullptr;
 
+    // Continue de générer une nouvelle pièce tant qu'elle est identique à l'ancienne
+    do {
+        // Libère la mémoire de l'ancienne pièce temporaire si elle existe
+        if (NouvellePiece != nullptr) {
+            delete NouvellePiece;
+        }
+
+        
+        int pieceType = random(1, 8);
+        switch (pieceType) {
+            case 1: NouvellePiece = new TPiece(); break;
+            case 2: NouvellePiece = new IPiece(); break;
+            case 3: NouvellePiece = new LPiece(); break;
+            case 4: NouvellePiece = new SPiece(); break;
+            case 5: NouvellePiece = new ZPiece(); break;
+            case 6: NouvellePiece = new OPiece(); break;
+            case 7: NouvellePiece = new JPiece(); break;
+        }
+
+    } while (PieceActuelle != nullptr && *PieceActuelle == *NouvellePiece);
+
+    // Libère la mémoire de l'ancienne pièce avant de la remplacer
+    if (PieceActuelle != nullptr) {
+        delete PieceActuelle;
+    }
+
+    // Remplace l'ancienne pièce par la nouvelle
+    PieceActuelle = NouvellePiece;
+
+    // Configure la position initiale de la pièce
     int PositionInitialeX = 2;
     int PositionInitialeY = 0;
 
-    if (PieceActuelle->PeutBouger(GrillePartie.GetMatriceGrille(), PositionInitialeX, PositionInitialeY) == true) {
-    PieceActuelle->SetPositionX(PositionInitialeX); //2 pour centrer la pièce
-    PieceActuelle->SetPositionY(PositionInitialeY); //On met -2 car toutes les matrices des blocs non bougés on les deux premières lignes vides
+    if (PieceActuelle->PeutBouger(GrillePartie.GetMatriceGrille(), PositionInitialeX, PositionInitialeY)) {
+        PieceActuelle->SetPositionX(PositionInitialeX);
+        PieceActuelle->SetPositionY(PositionInitialeY);
+    } else {
+        TerminerPartie();
     }
-    else {
-      TerminerPartie();
-    }
-  }
+}
+
 
   bool GestionJeu::PieceActuellePeutBouger() {
 

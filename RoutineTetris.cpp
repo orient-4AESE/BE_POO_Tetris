@@ -37,7 +37,7 @@ void RoutineTetris::PartieTetris() {
     partieEnCours.GetGrillePartie().VerifierLignePleine();
 
     //Delay permettant d'ajuster la vitesse de jeu
-    delay(30);
+    delay(5);
     }
     //On sort du while, la partie est finie
     partieEnCours.TerminerPartie();

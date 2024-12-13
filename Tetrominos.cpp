@@ -20,31 +20,6 @@ Tetrominos::Tetrominos() {
 // Destructeur
 Tetrominos::~Tetrominos() {}
 
-// Affichage de la matrice 5x5 représentant une pièce
-/*
-void Tetrominos::AfficherPiece() {
-    // Met à jour la matrice de l'écran
-    char MatriceTemp[Ecran.LongueurMatrice][Ecran.LargeurMatrice];
-    
-    // Initialiser une matrice vide
-    for (int i = 0; i < Ecran.LongueurMatrice; i++) {
-        for (int j = 0; j < Ecran.LargeurMatrice; j++) {
-            MatriceTemp[i][j] = '0';
-        }
-    }
-
-    // Insérer la pièce dans la matrice temporaire
-    for (int i = 0; i < TailleMatrice; i++) {
-        for (int j = 0; j < TailleMatrice; j++) {
-            MatriceTemp[i + PositionY][j + PositionX] = MatricePiece[i][j];
-        }
-    }
-
-    // Afficher sur l'écran LED
-    Ecran.UpdateMatrice(MatriceTemp);
-    Ecran.AfficherMatrice();
-}*/
-
 int Tetrominos::GetPositionX() {
     return PositionX;
 }

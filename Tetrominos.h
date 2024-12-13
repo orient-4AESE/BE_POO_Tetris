@@ -24,7 +24,6 @@ protected:
 public:
 	Tetrominos(); //Constructeur d'un Tetrominos
 	void RotationPiece();
-	void AfficherPiece();
 
 	static int GetTailleMatrice() { return TailleMatrice; }
 	char GetMatricePiece(int y, int x) {return MatricePiece[y][x]; }

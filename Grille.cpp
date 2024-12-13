@@ -10,27 +10,6 @@ Grille::Grille() {
     }
 }
 
-void Grille::AfficherGrille() {
-    for (int i = 0; i < LongueurMatrice; i++) {
-        for (int j = 0; j < LargeurMatrice; j++) {
-            Serial.print(MatriceGrille[i][j]);
-            Serial.print(" ");
-        }
-        Serial.println(); // Saut de ligne pour chaque rangée
-    }
-}
-
-void Grille::DefinirLignePleine(int Ligne, char caractere) {
-    for (int j = 0; j < LargeurMatrice; j++) {
-        MatriceGrille[Ligne][j] = caractere;
-    }
-}
-
-void Grille::DefinirLigneNonPleine(int Ligne, char caractere) {
-    for (int j = 0; j < LargeurMatrice - 1; j++) {
-        MatriceGrille[Ligne][j] = caractere;
-    }
-}
 
 void Grille::VerifierLignePleine() {
     for (int i = 0; i < LongueurMatrice; i++) {
